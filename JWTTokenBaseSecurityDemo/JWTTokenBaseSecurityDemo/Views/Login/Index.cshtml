@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnlogin').click(function () {
+                CheckLogin();
+            })
+        })
+        function CheckLogin()
+        {
+            var code = $('#ecode').val();
+            var pass = $('#epass').val();
+            $.ajax({
+                url: '/token',
+                method: 'post',
+                data:'username='+code+"&password="+pass+'&grant_type=password',
+                success:function(resp)
+                {
+                    //console.log(resp)
+                    localStorage.setItem("Token", resp.access_token)//store the token
+                    window.location.href ="/Login/Dashboard";
+                }
+            })
+
+        }
+    </script>
+</head>
+<body>
+    <div> 
+        <table>
+            <tr>
+                <td>Employee_Code:</td>
+                <td>
+                    <input type="text" id="ecode"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password:
+                </td>
+                <td>
+                    <input type="password" id="epass"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" value="Login" id="btnlogin"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ApiConsumeDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Roll_no" />
+          </Key>
+          <Property Name="Roll_no" Type="int" Nullable="false" />
+          <Property Name="Stud_Name" Type="varchar" MaxLength="30" />
+          <Property Name="stud_Address" Type="varchar" MaxLength="30" />
+          <Property Name="Marks" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="spCheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ApiConsumeDemoModelStoreContainer">
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ApiConsumeDemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Roll_no" />
+          </Key>
+          <Property Name="Roll_no" Type="Int32" Nullable="false" />
+          <Property Name="Stud_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="stud_Address" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Marks" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ApiConsumeDemoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <FunctionImport Name="spCheckLogin" ReturnType="Collection(ApiConsumeDemoModel.spCheckLogin_Result)">
+            <Parameter Name="code" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spCheckLogin_Result">
+          <Property Type="Int32" Name="empId" Nullable="false" />
+          <Property Type="String" Name="empName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="employeeCode" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="roleId" Nullable="false" />
+          <Property Type="String" Name="roleName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="mobile_number" Nullable="true" MaxLength="30" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ApiConsumeDemoModelStoreContainer" CdmEntityContainer="ApiConsumeDemoEntities">
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="ApiConsumeDemoModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Roll_no" ColumnName="Roll_no" />
+                <ScalarProperty Name="Stud_Name" ColumnName="Stud_Name" />
+                <ScalarProperty Name="stud_Address" ColumnName="stud_Address" />
+                <ScalarProperty Name="Marks" ColumnName="Marks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spCheckLogin" FunctionName="ApiConsumeDemoModel.Store.spCheckLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ApiConsumeDemoModel.spCheckLogin_Result">
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="empName" ColumnName="empName" />
+                <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+                <ScalarProperty Name="mobile_number" ColumnName="mobile_number" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

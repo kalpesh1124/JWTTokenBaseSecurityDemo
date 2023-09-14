@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ApiConsumeDemoModelStoreContainer" CdmEntityContainer="ApiConsumeDemoEntities">
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="ApiConsumeDemoModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="Roll_no" ColumnName="Roll_no" />
+          <ScalarProperty Name="Stud_Name" ColumnName="Stud_Name" />
+          <ScalarProperty Name="stud_Address" ColumnName="stud_Address" />
+          <ScalarProperty Name="Marks" ColumnName="Marks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spCheckLogin" FunctionName="ApiConsumeDemoModel.Store.spCheckLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ApiConsumeDemoModel.spCheckLogin_Result">
+          <ScalarProperty Name="empId" ColumnName="empId" />
+          <ScalarProperty Name="empName" ColumnName="empName" />
+          <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
+          <ScalarProperty Name="mobile_number" ColumnName="mobile_number" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ApiConsumeDemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Roll_no" />
+    </Key>
+    <Property Name="Roll_no" Type="Int32" Nullable="false" />
+    <Property Name="Stud_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="stud_Address" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Marks" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ApiConsumeDemoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <FunctionImport Name="spCheckLogin" ReturnType="Collection(ApiConsumeDemoModel.spCheckLogin_Result)">
+      <Parameter Name="code" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="spCheckLogin_Result">
+    <Property Type="Int32" Name="empId" Nullable="false" />
+    <Property Type="String" Name="empName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="employeeCode" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="roleId" Nullable="false" />
+    <Property Type="String" Name="roleName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="mobile_number" Nullable="true" MaxLength="30" />
+  </ComplexType>
+</Schema>

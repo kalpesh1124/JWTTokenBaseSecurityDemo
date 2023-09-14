@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Dashboard</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        var token = localStorage.getItem("Token");
+        $(document).ready(function () {
+            $.ajax({
+            url:'/api/Student',
+            method: 'get',
+            headers:
+            {
+                'Authorization':'Bearer'+token
+            },
+            success:function(resp)
+            {
+                console.log(resp)
+            }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div> 
+        <h1>Dashboard View!!!!</h1>
+    </div>
+</body>
+</html>
